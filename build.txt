@@ -1,0 +1,4 @@
+displayName = Munchies - Calamity Addon
+author = Jboss
+version = 1.0
+modReferences = Munchies@1.1.1,CalamityMod@2.0.4.3
