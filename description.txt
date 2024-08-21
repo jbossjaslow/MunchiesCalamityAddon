@@ -1,1 +1,1 @@
-Modify this file with a description of your mod.
+An addon mod for Munchies - Consumables Checklist that brings support for Calamity comsumables.

@@ -1,4 +1,7 @@
 displayName = Munchies - Calamity Addon
 author = Jboss
-version = 1.0
+version = 1.1
+side = Client
 modReferences = Munchies@1.1.1,CalamityMod@2.0.4.3
+buildIgnore = terraria_mod_border.xcf
+homepage = "https://github.com/jbossjaslow/MunchiesCalamityAddon"
