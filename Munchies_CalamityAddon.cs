@@ -41,36 +41,36 @@ namespace Munchies_CalamityAddon {
 
 		private void AddCalamityConsumables_Health() {
 			if (CalamityMod == null) return;
-			CallMunchiesMod(GetModItem("BloodOrange"), "player_normal", () => Main.LocalPlayer.Calamity().bOrange);
-			CallMunchiesMod(GetModItem("MiracleFruit"), "player_normal", () => Main.LocalPlayer.Calamity().mFruit);
-			CallMunchiesMod(GetModItem("Elderberry"), "player_normal", () => Main.LocalPlayer.Calamity().eBerry);
-			CallMunchiesMod(GetModItem("Dragonfruit"), "player_normal", () => Main.LocalPlayer.Calamity().dFruit);
+			CallMunchiesMod(GetModItem("BloodOrange"), "player_normal", () => Main.LocalPlayer.Calamity().bOrange, "classic", () => true);
+			CallMunchiesMod(GetModItem("MiracleFruit"), "player_normal", () => Main.LocalPlayer.Calamity().mFruit, "classic", () => true);
+			CallMunchiesMod(GetModItem("Elderberry"), "player_normal", () => Main.LocalPlayer.Calamity().eBerry, "classic", () => true);
+			CallMunchiesMod(GetModItem("Dragonfruit"), "player_normal", () => Main.LocalPlayer.Calamity().dFruit, "classic", () => true);
 		}
 
 		private void AddCalamityConsumables_Mana() {
 			if (CalamityMod == null) return;
-			CallMunchiesMod(GetModItem("CometShard"), "player_normal", () => Main.LocalPlayer.Calamity().cShard);
-			CallMunchiesMod(GetModItem("EtherealCore"), "player_normal", () => Main.LocalPlayer.Calamity().eCore);
-			CallMunchiesMod(GetModItem("PhantomHeart"), "player_normal", () => Main.LocalPlayer.Calamity().pHeart);
+			CallMunchiesMod(GetModItem("CometShard"), "player_normal", () => Main.LocalPlayer.Calamity().cShard, "classic", () => true);
+			CallMunchiesMod(GetModItem("EtherealCore"), "player_normal", () => Main.LocalPlayer.Calamity().eCore, "classic", () => true);
+			CallMunchiesMod(GetModItem("PhantomHeart"), "player_normal", () => Main.LocalPlayer.Calamity().pHeart, "classic", () => true);
 		}
 
 		private void AddCalamityConsumables_RageMode() {
 			if (CalamityMod == null) return;
-			CallMunchiesMod(GetModItem("MushroomPlasmaRoot"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostOne);
-			CallMunchiesMod(GetModItem("InfernalBlood"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostTwo);
-			CallMunchiesMod(GetModItem("RedLightningContainer"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostThree);
+			CallMunchiesMod(GetModItem("MushroomPlasmaRoot"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostOne, "Revengeance", () => Main.LocalPlayer.Calamity().RageEnabled);
+			CallMunchiesMod(GetModItem("InfernalBlood"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostTwo, "Revengeance", () => Main.LocalPlayer.Calamity().RageEnabled);
+			CallMunchiesMod(GetModItem("RedLightningContainer"), Color.Red, () => Main.LocalPlayer.Calamity().rageBoostThree, "Revengeance", () => Main.LocalPlayer.Calamity().RageEnabled);
 		}
 
 		private void AddCalamityConsumables_AdrenalineMode() {
 			if (CalamityMod == null) return;
-			CallMunchiesMod(GetModItem("ElectrolyteGelPack"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostOne);
-			CallMunchiesMod(GetModItem("StarlightFuelCell"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostTwo);
-			CallMunchiesMod(GetModItem("Ectoheart"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostThree);
+			CallMunchiesMod(GetModItem("ElectrolyteGelPack"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostOne, "Revengeance", () => Main.LocalPlayer.Calamity().AdrenalineEnabled);
+			CallMunchiesMod(GetModItem("StarlightFuelCell"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostTwo, "Revengeance", () => Main.LocalPlayer.Calamity().AdrenalineEnabled);
+			CallMunchiesMod(GetModItem("Ectoheart"), Color.Red, () => Main.LocalPlayer.Calamity().adrenalineBoostThree, "Revengeance", () => Main.LocalPlayer.Calamity().AdrenalineEnabled);
 		}
 
 		private void AddCalamityConsumables_Other() {
 			if (CalamityMod == null) return;
-			CallMunchiesMod(GetModItem("CelestialOnion"), "player_normal", () => Main.LocalPlayer.Calamity().extraAccessoryML);
+			CallMunchiesMod(GetModItem("CelestialOnion"), "player_normal", () => Main.LocalPlayer.Calamity().extraAccessoryML, "classic", () => true);
 		}
 
 		private ModItem GetModItem(string name) {
@@ -80,7 +80,7 @@ namespace Munchies_CalamityAddon {
 			else return null;
 		}
 
-		private void CallMunchiesMod(ModItem item, object categoryOrColor, Func<bool> hasBeenConsumed) {
+		private void CallMunchiesMod(ModItem item, object categoryOrColor, Func<bool> hasBeenConsumed, string difficulty, Func<bool> availability) {
 			if (MunchiesMod == null || item == null) return;
 
 			object[] args = [
@@ -89,7 +89,10 @@ namespace Munchies_CalamityAddon {
 				"1.3",
 				item,
 				categoryOrColor,
-				hasBeenConsumed
+				hasBeenConsumed,
+				difficulty,
+				null,
+				availability
 			];
 			MunchiesMod.Call(args);
 		}
