@@ -1,1 +1,3 @@
-﻿Created mod.
+﻿Updated to support Munchies 1.4
+Added acquisition text
+Added Enchanted Starfish entry

@@ -1,6 +1,8 @@
 ﻿An addon for the Munchies mod that adds support for Calamity.
 
+Update 1.2: Added support for new acquisition text enhancements in Munchies
 Update 1.1: Should now work in multiplayer
 
 Visit Munchies below!
 https://steamcommunity.com/sharedfiles/filedetails/?id=3310041861
+
