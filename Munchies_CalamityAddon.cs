@@ -34,7 +34,7 @@ namespace Munchies_CalamityAddon {
 			BloodOrangeText = this.GetLocalization("Acquisition.BloodOrange");
 			MiracleFruitText = this.GetLocalization("Acquisition.MiracleFruit");
 			ElderberryText = this.GetLocalization("Acquisition.Elderberry");
-			DragonfruitText = this.GetLocalization("Acquisition.DragonFruit");
+			DragonfruitText = this.GetLocalization("Acquisition.Dragonfruit");
 			EnchantedStarfishText = this.GetLocalization("Acquisition.EnchantedStarfish");
 			CometShardText = this.GetLocalization("Acquisition.CometShard");
 			EtherealCoreText = this.GetLocalization("Acquisition.EtherealCore");
