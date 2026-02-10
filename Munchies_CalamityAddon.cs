@@ -5,6 +5,8 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using CalamityMod.Items.Fishing;
+using System.Reflection;
+using CalamityMod.CalPlayer;
 
 namespace Munchies_CalamityAddon {
 	public class Munchies_CalamityAddon : Mod {
@@ -13,6 +15,9 @@ namespace Munchies_CalamityAddon {
 		internal Mod CalamityMod;
 
 		private LocalizedText BloodOrangeText;
+		private LocalizedText SanguineTangerineText;
+		private LocalizedText TaintedCloudberryText;
+		private LocalizedText SacredStrawberryText;
 		private LocalizedText MiracleFruitText;
 		private LocalizedText ElderberryText;
 		private LocalizedText DragonfruitText;
@@ -28,10 +33,14 @@ namespace Munchies_CalamityAddon {
 		private LocalizedText EctoheartText;
 		private LocalizedText CelestialOnionText;
 
+
 		public override void Load() {
 			instance = this;
 
 			BloodOrangeText = this.GetLocalization("Acquisition.BloodOrange");
+			SanguineTangerineText = this.GetLocalization("Acquisition.SanguineTangerine");
+			TaintedCloudberryText = this.GetLocalization("Acquisition.TaintedCloudberry");
+			SacredStrawberryText = this.GetLocalization("Acquisition.SacredStrawberry");
 			MiracleFruitText = this.GetLocalization("Acquisition.MiracleFruit");
 			ElderberryText = this.GetLocalization("Acquisition.Elderberry");
 			DragonfruitText = this.GetLocalization("Acquisition.Dragonfruit");
@@ -73,10 +82,19 @@ namespace Munchies_CalamityAddon {
 
 		private void AddCalamityConsumables_Health() {
 			if (CalamityMod == null) return;
-			CallMunchiesModConsumable(GetModItem("BloodOrange"), () => Main.LocalPlayer.Calamity().bOrange, BloodOrangeText);
 			CallMunchiesModConsumable(GetModItem("MiracleFruit"), () => Main.LocalPlayer.Calamity().mFruit, MiracleFruitText);
-			CallMunchiesModConsumable(GetModItem("Elderberry"), () => Main.LocalPlayer.Calamity().eBerry, ElderberryText);
-			CallMunchiesModConsumable(GetModItem("Dragonfruit"), () => Main.LocalPlayer.Calamity().dFruit, DragonfruitText);
+			if (CalamityMod.Version < new Version(2, 1) ){
+				var eBerry = typeof(CalamityPlayer).GetField("eBerry");
+				var dFruit = typeof(CalamityPlayer).GetField("dFruit");
+				CallMunchiesModConsumable(GetModItem("BloodOrange"), () => Main.LocalPlayer.Calamity().sTangerine, BloodOrangeText);
+				CallMunchiesModConsumable(GetModItem("Elderberry"), () => (bool)eBerry.GetValue(Main.LocalPlayer.Calamity()), ElderberryText);
+				CallMunchiesModConsumable(GetModItem("Dragonfruit"), () => (bool)dFruit.GetValue(Main.LocalPlayer.Calamity()), DragonfruitText);
+			} else {
+				CallMunchiesModConsumable(GetModItem("SanguineTangerine"), () => Main.LocalPlayer.Calamity().sTangerine, SanguineTangerineText);
+				CallMunchiesModConsumable(GetModItem("TaintedCloudberry"), () => Main.LocalPlayer.Calamity().tCloudberry, TaintedCloudberryText);
+				CallMunchiesModConsumable(GetModItem("SacredStrawberry"), () => Main.LocalPlayer.Calamity().sStrawberry, SacredStrawberryText);
+			}
+
 		}
 
 		private void AddCalamityConsumables_Mana() {
